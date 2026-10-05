@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For Una Pereira</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Great+Vibes&family=Jost:wght@300;400;500&family=Amiri:wght@400;700&display=swap">
+<style>
+/* Layout: one stage, two acts. Act I is an invitation (emblem + button); Act II is the tribute letter in gold on midnight ink. */
+:root{
+  --ink:#0c0a1d;
+  --plum:#24163f;
+  --gold:#e9c77b;
+  --gold-deep:#b98a3e;
+  --rose:#e2a58a;
+  --ivory:#f7efe1;
+  --muted:#b9adc9;
+  --display:"Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --script:"Great Vibes", "Snell Roundhand", "Apple Chancery", cursive;
+  --body:"Jost", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --arabic:"Amiri", "Geeza Pro", "Traditional Arabic", serif;
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  background:var(--ink);
+  color:var(--ivory);
+  font-family:var(--body);
+  font-weight:300;
+  overflow-x:hidden;
+}
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.glow{
+  position:fixed;inset:-20%;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(40% 35% at 50% 38%, color-mix(in srgb,var(--plum) 90%, transparent), transparent 70%),
+    radial-gradient(30% 30% at 15% 85%, color-mix(in srgb,var(--gold-deep) 18%, transparent), transparent 70%),
+    radial-gradient(30% 30% at 88% 12%, color-mix(in srgb,var(--rose) 14%, transparent), transparent 70%);
+  animation:breathe 12s ease-in-out infinite alternate;
+}
+@keyframes breathe{to{transform:scale(1.08) rotate(2deg)}}
+
+.stage{position:relative;z-index:2;min-height:100%;display:grid;place-items:center;padding-inline:16px;padding-block:40px}
+
+/* ---------- Act I ---------- */
+.intro{display:flex;flex-direction:column;align-items:center;gap:28px;text-align:center;transition:opacity 1.1s ease, transform 1.4s cubic-bezier(.2,.7,.1,1), filter 1.1s}
+.intro.leaving{opacity:0;transform:scale(1.25);filter:blur(8px);pointer-events:none}
+.eyebrow{font-size:.78rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);opacity:.9}
+.emblem{position:relative;width:min(300px,72vw);aspect-ratio:1;max-width:100%}
+.emblem svg.ring{position:absolute;inset:0;width:100%;height:100%;animation:spin 40s linear infinite}
+.emblem .halo{position:absolute;inset:14%;border-radius:50%;
+  background:conic-gradient(from 0deg,var(--gold),var(--rose),var(--gold-deep),var(--ivory),var(--gold));
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1px));
+          mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1px));
+  animation:spin 9s linear infinite reverse}
+.emblem .core{position:absolute;inset:18%;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 50% 35%, color-mix(in srgb,var(--plum) 70%, var(--ink)), var(--ink) 75%);
+  box-shadow:0 0 60px color-mix(in srgb,var(--gold) 25%, transparent), inset 0 0 40px color-mix(in srgb,var(--gold) 12%, transparent)}
+.core .happy{font-family:var(--script);font-size:clamp(2.6rem,9vw,3.6rem);line-height:.9;color:var(--gold);margin-bottom:-.15em}
+.core .td{font-family:var(--display);font-size:clamp(.95rem,3.4vw,1.2rem);letter-spacing:.28em;text-transform:uppercase}
+.core .date{font-size:.68rem;letter-spacing:.35em;color:var(--muted);margin-top:.6em}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+h1.headline{font-family:var(--display);font-weight:400;font-size:clamp(1.6rem,5.5vw,2.6rem);line-height:1.15;margin:0;text-wrap:balance;max-width:20ch}
+h1.headline em{font-style:italic;color:var(--gold)}
+
+.cta{
+  position:relative;overflow:hidden;cursor:pointer;
+  font:500 1.05rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink);
+  background:linear-gradient(120deg,var(--gold-deep),var(--gold) 40%,var(--ivory) 52%,var(--gold) 64%,var(--gold-deep));
+  background-size:250% 100%;
+  border:0;border-radius:999px;padding:20px 40px;
+  animation:sheen 3.2s linear infinite, pulse 2.4s ease-in-out infinite;
+  box-shadow:0 0 0 0 color-mix(in srgb,var(--gold) 50%, transparent);
+}
+.cta:focus-visible{outline:2px solid var(--ivory);outline-offset:5px}
+@keyframes sheen{from{background-position:100% 0}to{background-position:-150% 0}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--gold) 55%, transparent)}70%{box-shadow:0 0 0 22px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.hint{font-size:.8rem;color:var(--muted);letter-spacing:.06em}
+
+/* ---------- Act II ---------- */
+.tribute{width:100%;max-width:760px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px}
+.tribute[hidden]{display:none!important}
+.flash{position:fixed;inset:0;z-index:5;pointer-events:none;background:radial-gradient(circle at 50% 50%,var(--ivory),var(--gold) 30%,transparent 65%);opacity:0}
+.flash.go{animation:flash 1.6s ease-out forwards}
+@keyframes flash{0%{opacity:0;transform:scale(.2)}25%{opacity:.95}100%{opacity:0;transform:scale(2.4)}}
+
+.reveal{opacity:0;transform:translateY(18px);filter:blur(6px);animation:rise 1.4s cubic-bezier(.2,.7,.1,1) forwards;animation-delay:var(--d,0s)}
+@keyframes rise{to{opacity:1;transform:none;filter:none}}
+
+.to{font-size:.8rem;letter-spacing:.42em;text-transform:uppercase;color:var(--muted)}
+.name{
+  font-family:var(--script);font-weight:400;margin:0;line-height:1.05;
+  font-size:clamp(3.6rem,15vw,7.5rem);
+  background:linear-gradient(100deg,var(--gold-deep) 0%,var(--gold) 30%,var(--ivory) 45%,var(--gold) 60%,var(--rose) 80%,var(--gold-deep) 100%);
+  background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 4px 30px color-mix(in srgb,var(--gold) 30%, transparent));
+  padding-inline:.15em;
+}
+.name.reveal{animation:rise 1.6s cubic-bezier(.2,.7,.1,1) forwards, sheen 6s linear 1.6s infinite;animation-delay:var(--d,0s),calc(var(--d,0s) + 1.6s)}
+.role{font-family:var(--display);font-size:clamp(.85rem,2.6vw,1.05rem);letter-spacing:.32em;text-transform:uppercase;color:var(--gold);text-wrap:balance}
+.role small{display:block;font-family:var(--body);font-size:.72rem;letter-spacing:.3em;color:var(--muted);margin-top:.7em}
+
+.ornament{width:min(340px,80%);height:24px;display:block}
+.ornament path,.ornament circle{stroke:var(--gold);fill:none;stroke-width:1}
+.ornament .dot{fill:var(--gold);stroke:none}
+
+.letter{display:flex;flex-direction:column;gap:16px;max-width:58ch}
+.letter p{margin:0;font-family:var(--display);font-size:clamp(1.12rem,3.3vw,1.4rem);line-height:1.65;color:var(--ivory);text-wrap:pretty}
+.letter p.lead::first-letter{font-size:2.2em;color:var(--gold);float:left;line-height:.9;padding-right:.08em;font-style:italic}
+.letter p.lead{text-align:start}
+.letter em{color:var(--gold);font-style:italic}
+
+.arabic{direction:rtl;font-family:var(--arabic);font-size:clamp(1.15rem,3.6vw,1.45rem);line-height:2;color:var(--ivory);max-width:52ch;
+  border-top:1px solid color-mix(in srgb,var(--gold) 30%, transparent);border-bottom:1px solid color-mix(in srgb,var(--gold) 30%, transparent);padding-block:18px;margin:0}
+.arabic b{color:var(--gold);font-weight:700}
+
+.sign{font-family:var(--script);font-size:clamp(1.8rem,6vw,2.4rem);color:var(--gold);line-height:1.1}
+.sign span{display:block;font-family:var(--body);font-size:.72rem;letter-spacing:.35em;text-transform:uppercase;color:var(--muted);margin-top:.5em}
+
+.controls{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:6px}
+.ghost{cursor:pointer;font:400 .82rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--gold);
+  background:color-mix(in srgb,var(--ink) 60%, transparent);border:1px solid color-mix(in srgb,var(--gold) 55%, transparent);border-radius:999px;padding:13px 22px;
+  display:inline-flex;align-items:center;gap:10px;transition:background .3s,color .3s}
+.ghost:hover{background:var(--gold);color:var(--ink)}
+.ghost:focus-visible{outline:2px solid var(--ivory);outline-offset:4px}
+.bars{display:inline-flex;gap:2px;align-items:flex-end;height:12px}
+.bars i{width:2px;background:currentColor;height:30%;animation:eq 1s ease-in-out infinite}
+.bars i:nth-child(2){animation-delay:.2s}.bars i:nth-child(3){animation-delay:.4s}.bars i:nth-child(4){animation-delay:.1s}
+.muted .bars i{animation:none;height:20%}
+@keyframes eq{50%{height:100%}}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none;filter:none}
+}
+</style>
+</head>
+<body>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="glow" aria-hidden="true"></div>
+<div class="flash" id="flash" aria-hidden="true"></div>
+
+<main class="stage">
+  <section class="intro" id="intro">
+    <div class="eyebrow">World Teachers' Day · 5 October</div>
+    <div class="emblem" aria-hidden="true">
+      <svg class="ring" viewBox="0 0 300 300">
+        <defs><path id="circ" d="M150,150 m-132,0 a132,132 0 1,1 264,0 a132,132 0 1,1 -264,0"/></defs>
+        <text fill="#e9c77b" font-family="Jost, sans-serif" font-size="11.5" letter-spacing="5.2">
+          <textPath href="#circ">THANK YOU · MS. UNA PEREIRA · THANK YOU · HAPPY TEACHERS' DAY · </textPath>
+        </text>
+      </svg>
+      <div class="halo"></div>
+      <div class="core">
+        <div>
+          <div class="happy">Happy</div>
+          <div class="td">Teachers' Day</div>
+          <div class="date">2026</div>
+        </div>
+      </div>
+    </div>
+    <h1 class="headline">A little something for <em>the best academic director</em> in the world</h1>
+    <button class="cta" id="open" type="button">Please click here</button>
+    <div class="hint">Turn your sound on ♪</div>
+  </section>
+
+  <section class="tribute" id="tribute" hidden aria-live="polite">
+    <div class="to reveal" style="--d:.3s">With love and gratitude, to</div>
+    <h2 class="name reveal" style="--d:.7s">Una Pereira</h2>
+    <div class="role reveal" style="--d:1.4s">The World's Best Academic Director<small>Happy Teachers' Day</small></div>
+
+    <svg class="ornament reveal" style="--d:1.9s" viewBox="0 0 340 24" aria-hidden="true">
+      <path d="M0 12 H130"/><path d="M210 12 H340"/>
+      <path d="M140 12 C150 2,160 2,170 12 C180 22,190 22,200 12"/>
+      <path d="M140 12 C150 22,160 22,170 12 C180 2,190 2,200 12"/>
+      <circle class="dot" cx="170" cy="12" r="3"/>
+    </svg>
+
+    <div class="letter">
+      <p class="lead reveal" style="--d:2.4s">You are the heart behind our achievements and the driving force of our growth. Every step forward this school has taken carries your touch.</p>
+      <p class="reveal" style="--d:3.6s">From the very first day you walked through our doors, <em>we began to see our future in you.</em></p>
+      <p class="reveal" style="--d:4.8s">The way you guide us, and the grace and kindness you show every one of us, are truly remarkable.</p>
+      <p class="reveal" style="--d:6s">We hope we will always live up to the faith you have in us.</p>
+    </div>
+
+    <p class="arabic reveal" style="--d:7.2s">أنتِ صاحبة <b>الإنجازات والتطوير</b>، ومنذ أول يوم جئتِ فيه إلى المدرسة ونحن نرى مستقبلنا فيكِ. أسلوبكِ معنا وتعاملكِ الراقي رائعٌ جداً، ونتمنى أن نكون دائماً عند حسن ظنكِ.</p>
+
+    <div class="sign reveal" style="--d:8.2s">Thank you, Ms. Una<span>Happy Teachers' Day · 5 October 2026</span></div>
+
+    <div class="controls reveal" style="--d:8.8s">
+      <button class="ghost" id="music" type="button" aria-pressed="true"><span class="bars"><i></i><i></i><i></i><i></i></span><span id="musicLabel">Music on</span></button>
+      <button class="ghost" id="again" type="button">✦ Celebrate again</button>
+      <button class="ghost" id="back" type="button">← Back</button>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ================= Canvas: gold dust + celebration bursts ================= */
+  const cv = document.getElementById('sky'), cx = cv.getContext('2d');
+  let W, H, DPR;
+  function size(){ DPR = Math.min(devicePixelRatio||1, 2); W = innerWidth; H = innerHeight; cv.width = W*DPR; cv.height = H*DPR; cx.setTransform(DPR,0,0,DPR,0,0); }
+  size(); addEventListener('resize', size);
+  const golds = ['#e9c77b','#f7efe1','#e2a58a','#b98a3e','#fff3c9'];
+  const dust = Array.from({length: Math.round(Math.min(160, innerWidth/7))}, () => ({
+    x: Math.random()*innerWidth, y: Math.random()*innerHeight, r: Math.random()*1.6+.3,
+    vy: -(Math.random()*.25+.05), vx: (Math.random()-.5)*.12, t: Math.random()*6.28, c: golds[(Math.random()*3)|0]
+  }));
+  let bits = [];
+  function burst(x, y, n = 140, power = 9){
+    for (let i=0;i<n;i++){
+      const a = Math.random()*Math.PI*2, s = Math.random()*power + 2;
+      bits.push({x, y, vx: Math.cos(a)*s, vy: Math.sin(a)*s - 3, life: 1, decay: Math.random()*.008+.006,
+        w: Math.random()*8+3, h: Math.random()*4+2, rot: Math.random()*6, vr: (Math.random()-.5)*.3,
+        c: golds[(Math.random()*golds.length)|0], spark: Math.random() < .35});
+    }
+  }
+  function frame(){
+    cx.clearRect(0,0,W,H);
+    for (const p of dust){
+      p.t += .03; p.x += p.vx; p.y += p.vy;
+      if (p.y < -5){ p.y = H+5; p.x = Math.random()*W; }
+      const a = .35 + Math.sin(p.t)*.35;
+      cx.globalAlpha = Math.max(0,a); cx.fillStyle = p.c;
+      cx.beginPath(); cx.arc(p.x,p.y,p.r,0,6.283); cx.fill();
+    }
+    for (let i=bits.length-1;i>=0;i--){
+      const b = bits[i];
+      b.vx *= .985; b.vy = b.vy*.985 + .12; b.x += b.vx; b.y += b.vy; b.rot += b.vr; b.life -= b.decay;
+      if (b.life <= 0 || b.y > H+40){ bits.splice(i,1); continue; }
+      cx.globalAlpha = Math.min(1, b.life*1.5);
+      if (b.spark){
+        cx.fillStyle = b.c; cx.shadowColor = b.c; cx.shadowBlur = 12;
+        cx.beginPath(); cx.arc(b.x,b.y,1.8,0,6.283); cx.fill(); cx.shadowBlur = 0;
+      } else {
+        cx.save(); cx.translate(b.x,b.y); cx.rotate(b.rot); cx.scale(1, Math.cos(b.rot*2));
+        cx.fillStyle = b.c; cx.fillRect(-b.w/2,-b.h/2,b.w,b.h); cx.restore();
+      }
+    }
+    cx.globalAlpha = 1;
+    requestAnimationFrame(frame);
+  }
+  if (!reduce) requestAnimationFrame(frame);
+
+  /* ================= Generative music (Web Audio) ================= */
+  let ac, master, started = false, playing = true;
+  const mtof = m => 440 * Math.pow(2, (m-69)/12);
+  function makeReverb(ctx, secs = 3.8){
+    const len = ctx.sampleRate*secs, buf = ctx.createBuffer(2, len, ctx.sampleRate);
+    for (let ch=0; ch<2; ch++){ const d = buf.getChannelData(ch); for (let i=0;i<len;i++) d[i] = (Math.random()*2-1)*Math.pow(1-i/len, 2.6); }
+    const c = ctx.createConvolver(); c.buffer = buf; return c;
+  }
+  // I–V–vi–IV feel in C, voiced lush: Fmaj9 · G6add9 · Em7 · Am9
+  const chords = [
+    {bass:41, pad:[57,60,64,67], arp:[69,72,76,79]},
+    {bass:43, pad:[59,62,64,69], arp:[71,74,76,81]},
+    {bass:40, pad:[55,59,62,67], arp:[67,71,74,79]},
+    {bass:45, pad:[60,64,67,71], arp:[69,72,76,83]},
+  ];
+  const melody = [
+    [[0,81,1.5],[1.5,79,.5],[2,77,2]],
+    [[0,79,1.5],[1.5,81,.5],[2,83,1],[3,86,1]],
+    [[0,83,2],[2,79,1],[3,76,1]],
+    [[0,76,1],[1,79,1],[2,81,2]],
+  ];
+  const melody2 = [
+    [[0,84,1],[1,83,1],[2,81,2]],
+    [[0,79,1],[1,81,1],[2,83,1.5],[3.5,86,.5]],
+    [[0,88,2],[2,86,1],[3,83,1]],
+    [[0,84,3],[3,83,1]],
+  ];
+  const BEAT = 60/70;
+  let bus, verb, delay;
+
+  function pad(t, notes, dur){
+    for (const m of notes){
+      for (const det of [-7, 7]){
+        const o = ac.createOscillator(), g = ac.createGain(), f = ac.createBiquadFilter();
+        o.type = 'sawtooth'; o.frequency.value = mtof(m); o.detune.value = det;
+        f.type = 'lowpass'; f.frequency.setValueAtTime(700, t); f.frequency.linearRampToValueAtTime(1500, t+dur*.5); f.frequency.linearRampToValueAtTime(800, t+dur); f.Q.value = .6;
+        g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.018, t+1.4); g.gain.setValueAtTime(.018, t+dur-.2); g.gain.linearRampToValueAtTime(0, t+dur+1.6);
+        o.connect(f).connect(g).connect(bus); o.start(t); o.stop(t+dur+1.8);
+      }
+    }
+  }
+  function bass(t, m, dur){
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.type = 'sine'; o.frequency.value = mtof(m);
+    g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.16, t+.08); g.gain.exponentialRampToValueAtTime(.05, t+dur); g.gain.linearRampToValueAtTime(0, t+dur+.4);
+    o.connect(g).connect(bus); o.start(t); o.stop(t+dur+.5);
+  }
+  function bell(t, m, vel = .07, len = 2.2, toDelay = true){
+    const f = mtof(m);
+    [[1, 1],[2, .35],[3.01, .12]].forEach(([mul, amp]) => {
+      const o = ac.createOscillator(), g = ac.createGain();
+      o.type = mul === 1 ? 'triangle' : 'sine'; o.frequency.value = f*mul;
+      g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vel*amp, t+.008); g.gain.exponentialRampToValueAtTime(.0001, t+len/mul);
+      o.connect(g); g.connect(bus); if (toDelay) g.connect(delay);
+      o.start(t); o.stop(t+len+.1);
+    });
+  }
+  function lead(t, m, dur){
+    const o = ac.createOscillator(), o2 = ac.createOscillator(), g = ac.createGain(), lfo = ac.createOscillator(), lg = ac.createGain();
+    o.type = 'sine'; o2.type = 'triangle'; o.frequency.value = mtof(m); o2.frequency.value = mtof(m); o2.detune.value = 4;
+    lfo.frequency.value = 5.2; lg.gain.value = 4; lfo.connect(lg); lg.connect(o.detune); lg.connect(o2.detune);
+    const d = dur*BEAT;
+    g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.06, t+.12); g.gain.setValueAtTime(.055, t+Math.max(.15,d-.1)); g.gain.exponentialRampToValueAtTime(.0001, t+d+.9);
+    o.connect(g); o2.connect(g); g.connect(bus); g.connect(delay);
+    [o,o2,lfo].forEach(n => { n.start(t); n.stop(t+d+1); });
+  }
+
+  let bar = 0, nextBar = 0, timer;
+  function scheduleBar(t, i){
+    const c = chords[i%4], cycle = Math.floor(i/4), barLen = BEAT*4;
+    pad(t, c.pad, barLen);
+    bass(t, c.bass, BEAT*2.5); bass(t+BEAT*2.5, c.bass+12, BEAT*1.5);
+    if (cycle >= 0){
+      const pat = [0,1,2,3,2,1,3,2];
+      pat.forEach((k, j) => {
+        const swing = j%2 ? .03 : 0;
+        bell(t + j*BEAT/2 + swing, c.arp[k] - (cycle===0 ? 12 : 0), cycle===0 ? .045 : .035, 1.8);
+      });
+    }
+    if (cycle >= 1){
+      const mel = (cycle % 2 === 1 ? melody : melody2)[i%4];
+      mel.forEach(([b, m, d]) => lead(t + b*BEAT, m, d));
+    }
+    if (cycle >= 2 && Math.random() < .6) bell(t + BEAT*3.5, 96 + [0,4,7][(Math.random()*3)|0], .025, 3);
+  }
+  function scheduler(){
+    while (nextBar < ac.currentTime + 1.2){ scheduleBar(nextBar, bar); bar++; nextBar += BEAT*4; }
+  }
+  function startMusic(){
+    try {
+      ac = new (window.AudioContext || window.webkitAudioContext)();
+      master = ac.createGain(); master.gain.value = 0;
+      const comp = ac.createDynamicsCompressor(); comp.threshold.value = -16; comp.ratio.value = 3;
+      bus = ac.createGain(); verb = makeReverb(ac);
+      const wet = ac.createGain(); wet.gain.value = .55; const dry = ac.createGain(); dry.gain.value = .75;
+      delay = ac.createDelay(2); delay.delayTime.value = BEAT*.75;
+      const fb = ac.createGain(); fb.gain.value = .32; const dl = ac.createGain(); dl.gain.value = .35; const dlf = ac.createBiquadFilter(); dlf.type='lowpass'; dlf.frequency.value = 3000;
+      delay.connect(dlf).connect(fb).connect(delay); dlf.connect(dl).connect(verb);
+      bus.connect(dry).connect(comp); bus.connect(verb).connect(wet).connect(comp);
+      comp.connect(master).connect(ac.destination);
+      master.gain.linearRampToValueAtTime(.9, ac.currentTime + 2.5);
+      // opening shimmer
+      const t0 = ac.currentTime + .05;
+      [72,76,79,84,88,91,96].forEach((m,i) => bell(t0 + i*.07, m, .05, 3));
+      nextBar = ac.currentTime + .6; bar = 0;
+      timer = setInterval(scheduler, 120); scheduler();
+      started = true;
+    } catch(e){ console.warn('Audio unavailable', e); }
+  }
+  function setMusic(on){
+    playing = on;
+    const btn = document.getElementById('music');
+    btn.setAttribute('aria-pressed', on); btn.classList.toggle('muted', !on);
+    document.getElementById('musicLabel').textContent = on ? 'Music on' : 'Music off';
+    if (!ac) return;
+    const now = ac.currentTime; master.gain.cancelScheduledValues(now);
+    master.gain.setValueAtTime(master.gain.value, now);
+    master.gain.linearRampToValueAtTime(on ? .9 : 0, now + .8);
+    if (on && ac.state === 'suspended') ac.resume();
+  }
+
+  /* ================= Choreography ================= */
+  const intro = document.getElementById('intro'), trib = document.getElementById('tribute'), flash = document.getElementById('flash');
+  document.getElementById('open').addEventListener('click', () => {
+    if (!started) startMusic();
+    intro.classList.add('leaving');
+    flash.classList.add('go');
+    setTimeout(() => {
+      intro.hidden = true; trib.hidden = false;
+      window.scrollTo({top:0});
+      if (!reduce){
+        burst(W/2, H*.4, 200, 11);
+        setTimeout(() => burst(W*.2, H*.35, 90, 8), 900);
+        setTimeout(() => burst(W*.8, H*.35, 90, 8), 1300);
+        setTimeout(() => burst(W/2, H*.25, 120, 9), 2600);
+      }
+    }, 650);
+  });
+  document.getElementById('music').addEventListener('click', () => setMusic(!playing));
+  document.getElementById('back').addEventListener('click', () => {
+    trib.hidden = true;
+    flash.classList.remove('go');
+    intro.hidden = false;
+    void intro.offsetWidth;
+    intro.classList.remove('leaving');
+    bits = [];
+    window.scrollTo({top:0});
+    document.getElementById('open').focus();
+  });
+  document.getElementById('again').addEventListener('click', () => {
+    if (reduce) return;
+    burst(W/2, H*.45, 220, 12);
+    setTimeout(() => burst(W*.25, H*.3, 100, 8), 400);
+    setTimeout(() => burst(W*.75, H*.3, 100, 8), 700);
+    if (ac && playing) [84,88,91,96,100].forEach((m,i) => bell(ac.currentTime + i*.08, m, .05, 2.5));
+  });
+})();
+</script>
+</body>
+</html>
